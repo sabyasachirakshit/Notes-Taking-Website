@@ -22,10 +22,9 @@ app.get("/", (req, res) => {
 
 //Route that handles login logic
 app.post("/notes", (req, res) => {
-  console.log(req.body);
-  //   console.log("Notes details below->");
-  //   console.log("Note Title" + req.body.addTitle);
-  //   console.log("Note Content:" + req.body.addTxt);
+  console.log("Notes details below->");
+  console.log("Note Title: " + req.body.addTitle);
+  console.log("Note Content: " + req.body.addTxt);
   res.send();
 });
 
