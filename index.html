@@ -40,18 +40,20 @@
 
     <div class="container mx-14 my-3">
         <h1>Welcome To Notes Taker</h1>
+        <form action="http://localhost:3000/notes" method="post">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Add Note Title:</h5>
                 <div class="form-group">
-                    <textarea class="form-control" id="addTitle" rows="1"></textarea>
+                    <textarea class="form-control" name="addTitle" id="addTitle" rows="1"></textarea>
                     <br>
                     <h5>Add Note Content:</h5>
-                    <textarea class="form-control" id="addTxt" rows="3"></textarea>
+                    <textarea class="form-control" name="addTxt" id="addTxt" rows="3"></textarea>
                 </div>
-                <button class="btn btn-success" id="addBtn">Add Note</button>
+                <button type="submit" class="btn btn-success" id="addBtn">Add Note</button>
             </div>
         </div>
+        </form>
  
         <h1>Your Notes</h1>
         <hr>
