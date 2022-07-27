@@ -3,12 +3,16 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const port = 3000;
+const path = require("path");
 
 var passwordDB = [
   { username: "abc", password: "123" },
   { username: "def", password: "456" },
   { username: "ghi", password: "789" },
 ];
+
+const staticPath = path.join(__dirname, "../");
+app.use(express.static(staticPath));
 
 // We are using our packages here
 app.use(bodyParser.json()); // to support JSON-encoded bodies
@@ -23,24 +27,28 @@ app.use(cors());
 
 //You can use this to check if your server is working
 app.post("/login", authentication, (req, res) => {
-  res.send(`Welcome!`);
+  res.sendFile(path.join(staticPath, "/notes.html"));
 });
 
 function authentication(req, res, next) {
+  var rendered = false;
   let username = req.body.username;
   let password = req.body.password;
   for (let i = 0; i < passwordDB.length; i++) {
     if (passwordDB[i].username == username) {
       if (passwordDB[i].password == password) {
+        rendered = true;
         next();
       } else {
         res.send("Password not maching. Please try again!");
       }
     }
   }
-  res.send(`<p>Username with ${username} does not exists! Click here to sign up
+  if (rendered === false) {
+    res.send(`<p>Username with ${username} does not exists! Click here to sign up
   </p>
   <a href='http://127.0.0.1:5500/backend/signup_page.html'>Create a New Account!</a>`);
+  }
 }
 
 app.post("/signup", (req, res) => {
